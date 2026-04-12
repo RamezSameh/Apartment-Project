@@ -7,6 +7,15 @@ OptionsBuilderConfigurationExtensions.UseSqlServer(builder.Configuration.GetConn
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowClientApp", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -20,9 +29,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors("AllowClientApp");
 
 app.UseAuthorization();
 
+app.MapControllers();
 app.MapStaticAssets();
 
 app.MapControllerRoute(

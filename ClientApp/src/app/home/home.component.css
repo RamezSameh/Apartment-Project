@@ -1,0 +1,16 @@
+.page-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+}
+
+.primary-button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  color: #ffffff;
+  background: #0f4c81;
+  text-decoration: none;
+}

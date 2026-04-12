@@ -1,0 +1,101 @@
+.page-card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.primary-button {
+  border: none;
+  background: #0f4c81;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.apartment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.apartment-table th,
+.apartment-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+}
+
+.apartment-table th {
+  text-align: left;
+  color: #374151;
+  font-weight: 700;
+}
+
+.thumb {
+  width: 90px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.text-muted {
+  color: #6b7280;
+}
+
+.available {
+  color: #0f9d58;
+  font-weight: 700;
+}
+
+.booked {
+  color: #b00020;
+  font-weight: 700;
+}
+
+.action-column {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.action-button {
+  border: 1px solid #0f4c81;
+  background: transparent;
+  color: #0f4c81;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.action-button.danger {
+  border-color: #b00020;
+  color: #b00020;
+}
+
+.action-button.success {
+  border-color: #0f9d58;
+  color: #0f9d58;
+}
+
+.status {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.status.error {
+  border-color: #f8d7da;
+  color: #7f1d1d;
+  background: #fef2f2;
+}

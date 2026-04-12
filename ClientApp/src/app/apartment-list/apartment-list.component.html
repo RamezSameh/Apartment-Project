@@ -1,0 +1,51 @@
+<section class="page-card">
+  <div class="header-row">
+    <div>
+      <h1>Apartment Listings</h1>
+      <p>Manage apartments, view details, book available units, and edit or delete listings.</p>
+    </div>
+    <button class="primary-button" type="button" (click)="create()">Create New</button>
+  </div>
+
+  <div *ngIf="loading" class="status">Loading apartments…</div>
+  <div *ngIf="error" class="status error">{{ error }}</div>
+
+  <table class="apartment-table" *ngIf="!loading && !error && apartments.length > 0">
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Availability</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let apartment of apartments">
+        <td>
+          <img *ngIf="getPhotoSrc(apartment)" [src]="getPhotoSrc(apartment)" alt="Apartment photo" class="thumb" />
+          <span *ngIf="!getPhotoSrc(apartment)" class="text-muted">No photo</span>
+        </td>
+        <td>{{ apartment.title }}</td>
+        <td>{{ apartment.location || 'N/A' }}</td>
+        <td>{{ apartment.description || 'No description' }}</td>
+        <td>{{ apartment.price | currency }}</td>
+        <td>
+          <span [class.available]="apartment.isAvailable" [class.booked]="!apartment.isAvailable">
+            {{ apartment.isAvailable ? 'Available' : 'Not Available' }}
+          </span>
+        </td>
+        <td class="action-column">
+          <button type="button" class="action-button" (click)="details(apartment.id)">Details</button>
+          <button type="button" class="action-button" (click)="edit(apartment.id)">Edit</button>
+          <button type="button" class="action-button danger" (click)="delete(apartment.id)">Delete</button>
+          <button *ngIf="apartment.isAvailable" type="button" class="action-button success" (click)="book(apartment.id)">Book</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !error && apartments.length === 0" class="status">No apartments found. Click Create New to add one.</div>
+</section>

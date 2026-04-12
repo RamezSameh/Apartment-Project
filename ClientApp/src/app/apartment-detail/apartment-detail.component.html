@@ -1,0 +1,49 @@
+<section class="page-card">
+  <div class="header-row">
+    <div>
+      <h1>Apartment Details</h1>
+      <p>Review the full details for the selected apartment.</p>
+    </div>
+    <button class="primary-button" type="button" (click)="back()">Back to list</button>
+  </div>
+
+  <div *ngIf="loading" class="status">Loading apartment details…</div>
+  <div *ngIf="error" class="status error">{{ error }}</div>
+
+  <div *ngIf="!loading && apartment" class="details-grid">
+    <div class="photo-panel">
+      <img *ngIf="getPhotoSrc()" [src]="getPhotoSrc()" alt="Apartment photo" class="detail-photo" />
+      <div *ngIf="!getPhotoSrc()" class="no-photo">No photo available</div>
+    </div>
+
+    <div class="info-panel">
+      <dl>
+        <div>
+          <dt>Title</dt>
+          <dd>{{ apartment.title }}</dd>
+        </div>
+        <div>
+          <dt>Location</dt>
+          <dd>{{ apartment.location || 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Description</dt>
+          <dd>{{ apartment.description || 'No description provided.' }}</dd>
+        </div>
+        <div>
+          <dt>Price</dt>
+          <dd>{{ apartment.price | currency }}</dd>
+        </div>
+        <div>
+          <dt>Availability</dt>
+          <dd>{{ apartment.isAvailable ? 'Available' : 'Booked' }}</dd>
+        </div>
+      </dl>
+
+      <div class="button-row">
+        <button type="button" class="primary-button" (click)="edit()">Edit</button>
+        <button type="button" class="secondary-button" (click)="back()">Back</button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+<section class="page-card">
+  <div class="header-row">
+    <div>
+      <h1>{{ isEdit ? 'Edit Apartment' : 'Create Apartment' }}</h1>
+      <p>{{ isEdit ? 'Update the apartment details below.' : 'Add a new apartment to the system.' }}</p>
+    </div>
+    <button class="secondary-button" type="button" (click)="cancel()">Back to list</button>
+  </div>
+
+  <div *ngIf="loading" class="status">Loading form…</div>
+  <div *ngIf="error" class="status error">{{ error }}</div>
+
+  <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()" class="form-grid">
+    <div class="field">
+      <label for="title">Title</label>
+      <input id="title" formControlName="title" />
+      <small *ngIf="form.controls.title.invalid && form.controls.title.touched">Title is required.</small>
+    </div>
+
+    <div class="field">
+      <label for="location">Location</label>
+      <input id="location" formControlName="location" />
+    </div>
+
+    <div class="field field-full">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" rows="4"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="price">Price</label>
+      <input id="price" type="number" formControlName="price" />
+      <small *ngIf="form.controls.price.invalid && form.controls.price.touched">Enter a valid price.</small>
+    </div>
+
+    <div class="field checkbox-field">
+      <label>
+        <input type="checkbox" formControlName="isAvailable" /> Available
+      </label>
+    </div>
+
+    <div class="field field-full">
+      <label for="photo">Photo</label>
+      <input id="photo" type="file" accept="image/*" (change)="fileChanged($event)" />
+    </div>
+
+    <div class="field field-full" *ngIf="photoPreview">
+      <label>Photo preview</label>
+      <img [src]="photoPreview" alt="Photo preview" class="preview-image" />
+    </div>
+
+    <div class="button-row field-full">
+      <button class="primary-button" [disabled]="saving" type="submit">{{ isEdit ? 'Save' : 'Create' }}</button>
+      <button class="secondary-button" type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</section>

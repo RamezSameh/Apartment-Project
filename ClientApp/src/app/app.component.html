@@ -1,0 +1,14 @@
+﻿<div class="app-container">
+  <nav class="navbar">
+    <div class="brand">{{ title }}</div>
+    <div class="links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/apartments" routerLinkActive="active">Apartments</a>
+      <a routerLink="/privacy" routerLinkActive="active">Privacy</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

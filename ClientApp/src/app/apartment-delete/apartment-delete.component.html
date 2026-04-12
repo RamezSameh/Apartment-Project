@@ -1,0 +1,33 @@
+<section class="page-card">
+  <div class="header-row">
+    <div>
+      <h1>Delete Apartment</h1>
+      <p>Confirm deletion of this apartment.</p>
+    </div>
+    <button class="secondary-button" type="button" (click)="cancel()">Cancel</button>
+  </div>
+
+  <div *ngIf="loading" class="status">Loading apartment details…</div>
+  <div *ngIf="error" class="status error">{{ error }}</div>
+
+  <div *ngIf="!loading && apartment" class="delete-details">
+    <div class="grid-row">
+      <div class="photo-panel">
+        <img *ngIf="apartment.photoBase64" [src]="`data:image/*;base64,${apartment.photoBase64}`" alt="Apartment photo" class="detail-photo" />
+        <div *ngIf="!apartment.photoBase64" class="no-photo">No photo available</div>
+      </div>
+      <div class="info-panel">
+        <h2>{{ apartment.title }}</h2>
+        <p>{{ apartment.description || 'No description available.' }}</p>
+        <p><strong>Location:</strong> {{ apartment.location || 'N/A' }}</p>
+        <p><strong>Price:</strong> {{ apartment.price | currency }}</p>
+        <p><strong>Availability:</strong> {{ apartment.isAvailable ? 'Available' : 'Booked' }}</p>
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button class="danger-button" type="button" (click)="delete()">Delete</button>
+      <button class="secondary-button" type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</section>
