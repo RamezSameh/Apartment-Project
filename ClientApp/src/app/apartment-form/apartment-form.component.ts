@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Apartment } from '../apartment.model';
 import { ApartmentService } from '../apartment.service';
 
@@ -91,13 +92,13 @@ export class ApartmentFormComponent implements OnInit {
     this.error = '';
     const apartment = this.form.value as Apartment;
 
-    const action = this.isEdit
+    const action: Observable<unknown> = this.isEdit
       ? this.apartmentService.updateApartment(apartment.id, apartment)
       : this.apartmentService.createApartment(apartment);
 
     action.subscribe({
       next: () => this.router.navigate(['/apartments']),
-      error: err => {
+      error: (err: any) => {
         this.error = err?.message ?? 'Unable to save apartment.';
         this.saving = false;
       }

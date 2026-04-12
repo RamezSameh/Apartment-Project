@@ -13,7 +13,7 @@
   <div *ngIf="!loading && apartment" class="delete-details">
     <div class="grid-row">
       <div class="photo-panel">
-        <img *ngIf="apartment.photoBase64" [src]="`data:image/*;base64,${apartment.photoBase64}`" alt="Apartment photo" class="detail-photo" />
+        <img *ngIf="apartment.photoBase64" [src]="'data:image/*;base64,' + apartment.photoBase64" alt="Apartment photo" class="detail-photo" />
         <div *ngIf="!apartment.photoBase64" class="no-photo">No photo available</div>
       </div>
       <div class="info-panel">

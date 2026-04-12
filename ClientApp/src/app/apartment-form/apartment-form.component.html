@@ -14,7 +14,7 @@
     <div class="field">
       <label for="title">Title</label>
       <input id="title" formControlName="title" />
-      <small *ngIf="form.controls.title.invalid && form.controls.title.touched">Title is required.</small>
+      <small *ngIf="form.get('title')?.invalid && form.get('title')?.touched">Title is required.</small>
     </div>
 
     <div class="field">
@@ -30,7 +30,7 @@
     <div class="field">
       <label for="price">Price</label>
       <input id="price" type="number" formControlName="price" />
-      <small *ngIf="form.controls.price.invalid && form.controls.price.touched">Enter a valid price.</small>
+      <small *ngIf="form.get('price')?.invalid && form.get('price')?.touched">Enter a valid price.</small>
     </div>
 
     <div class="field checkbox-field">
