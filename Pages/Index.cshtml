@@ -1,0 +1,577 @@
+﻿@page
+@model Apartment_Project.Pages.IndexModel
+@{
+    ViewData["Title"] = "Find Apartments for Rent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Modern hero section */
+    .hero-section {
+        background: linear-gradient(135deg, rgba(20,29,50,.75), rgba(30,50,80,.75)), url('/images/hero.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #fff;
+        padding: 5rem 0 4rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.95;
+        margin-bottom: 2rem;
+    }
+
+    /* Search card */
+    .search-card {
+        background: #fff;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+
+    .search-card .form-control,
+    .search-card .form-select {
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-card .form-control:focus,
+    .search-card .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    }
+
+    .search-btn {
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        height: 100%;
+    }
+
+    /* Popular links */
+    .popular-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .popular-links .location-badge {
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.3);
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+        display: inline-block;
+    }
+
+    .popular-links .location-badge:hover {
+        background: rgba(255,255,255,0.25);
+        border-color: rgba(255,255,255,0.5);
+        color: #fff;
+    }
+
+    /* Results layout */
+    .results-container {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .results-header h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .result-count {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 0.25rem;
+    }
+
+    /* Apartment cards */
+    .apartment-card {
+        background: #fff;
+        border: 1px solid #e9ecef;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .apartment-card:hover {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        border-color: #d0d5dd;
+        transform: translateY(-2px);
+    }
+
+    .apartment-image-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 66.67%;
+        background: #f0f0f0;
+        overflow: hidden;
+    }
+
+    .apartment-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .image-placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        background: #f5f5f5;
+        font-size: 0.9rem;
+    }
+
+    .apartment-badge {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        background: #28a745;
+        color: #fff;
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.3rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .apartment-badge.unavailable {
+        background: #dc3545;
+    }
+
+    .apartment-content {
+        padding: 1.25rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .apartment-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin: 0 0 0.5rem;
+        line-height: 1.3;
+        text-decoration: none;
+    }
+
+    .apartment-location {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .apartment-features {
+        display: flex;
+        gap: 1.5rem;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        color: #555;
+        flex-wrap: wrap;
+    }
+
+    .apartment-features span {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .apartment-footer {
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .apartment-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0d6efd;
+    }
+
+    .apartment-price-label {
+        font-size: 0.75rem;
+        color: #999;
+        text-transform: uppercase;
+    }
+
+    .details-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        border-radius: 0.4rem;
+    }
+
+    /* Sidebar map */
+    .map-sidebar {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+    }
+
+    .map-card {
+        background: #fff;
+        border: 1px solid #e9ecef;
+        border-radius: 0.75rem;
+        overflow: hidden;
+    }
+
+    .map-header {
+        padding: 1.25rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .map-header h6 {
+        margin: 0;
+        font-weight: 600;
+        color: #1a1a1a;
+    }
+
+    .map-placeholder {
+        height: 400px;
+        background: linear-gradient(135deg, #e9ecef 0%, #f5f5f5 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 0.9rem;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    /* No results */
+    .no-results {
+        text-align: center;
+        padding: 3rem;
+        color: #666;
+    }
+
+    .no-results svg {
+        width: 4rem;
+        height: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+
+    /* Pagination */
+    .pagination-container {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination {
+        gap: 0.25rem;
+    }
+
+    .page-link {
+        border: 1px solid #ddd;
+        border-radius: 0.4rem;
+        padding: 0.5rem 0.75rem;
+        color: #0d6efd;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .page-link:hover:not(.disabled) {
+        background: #f0f0f0;
+        border-color: #0d6efd;
+    }
+
+    .page-item.active .page-link {
+        background: #0d6efd;
+        border-color: #0d6efd;
+        color: #fff;
+    }
+
+    .page-item.disabled .page-link {
+        color: #999;
+        cursor: not-allowed;
+    }
+
+    /* Responsive */
+    @@media (max-width: 1200px) {
+        .results-container{
+            grid-template-columns: 1fr;
+        }
+
+        .map-sidebar {
+            position: relative;
+            top: 0;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 1.75rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+
+        .search-card {
+            padding: 1.5rem;
+        }
+
+        .apartment-card {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+        }
+
+        .apartment-image-container {
+            padding-bottom: 100%;
+        }
+
+        .apartment-content {
+            padding: 1rem;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1 class="hero-title">Find Your Perfect Apartment</h1>
+                <p class="hero-subtitle">Search hundreds of verified listings and find your ideal home today.</p>
+
+                <div class="popular-links">
+                    @foreach (var loc in Model.PopularLocations)
+                    {
+                        <a class="location-badge" href="?location=@Uri.EscapeDataString(loc)">@loc</a>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="search-card">
+                    <form method="get" id="searchForm">
+                        <div class="mb-3">
+                            <input type="text" name="q" value="@Model.q" class="form-control" 
+                                   placeholder="Search by title, keyword, or building" />
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="text" name="location" value="@Model.location" class="form-control" 
+                                   placeholder="City, neighborhood, or ZIP code" />
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <input type="number" name="minPrice" value="@(Model.minPrice?.ToString() ?? "")" 
+                                       min="0" class="form-control" placeholder="Min price" />
+                            </div>
+                            <div class="col-6">
+                                <input type="number" name="maxPrice" value="@(Model.maxPrice?.ToString() ?? "")" 
+                                       min="0" class="form-control" placeholder="Max price" />
+                            </div>
+                        </div>
+
+                        <div class="row g-2">
+                            <div class="col-8">
+                                <select name="sort" class="form-select">
+                                    <option value="recent" selected="@(Model.sort == "recent")">Newest listings</option>
+                                    <option value="price_asc" selected="@(Model.sort == "price_asc")">Price: Low to High</option>
+                                    <option value="price_desc" selected="@(Model.sort == "price_desc")">Price: High to Low</option>
+                                    <option value="available" selected="@(Model.sort == "available")">Available Now</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary search-btn w-100">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Results Section -->
+<div class="container results-container">
+    <div>
+        <div class="results-header">
+            <div>
+                <h2>Available Listings</h2>
+                <div class="result-count">@Model.TotalItems results @(!string.IsNullOrEmpty(Model.q) || !string.IsNullOrEmpty(Model.location) ? "found" : "")</div>
+            </div>
+        </div>
+
+        @if (!Model.Apartments.Any())
+        {
+            <div class="no-results">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                <h5>No apartments found</h5>
+                <p>Try adjusting your search filters or browse popular locations above.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row g-3">
+                @foreach (var apt in Model.Apartments)
+                {
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="apartment-card">
+                            <div class="apartment-image-container">
+                                @if (apt.SomePhoto != null && apt.SomePhoto.Length > 0)
+                                {
+                                    var b64 = Convert.ToBase64String(apt.SomePhoto);
+                                    <img class="apartment-image" src="data:image;base64,@b64" alt="@apt.Title" />
+                                }
+                                else
+                                {
+                                    <div class="image-placeholder">No photo available</div>
+                                }
+                                <span class="apartment-badge @(apt.IsAvailable ? "" : "unavailable")">
+                                    @(apt.IsAvailable ? "Available" : "Booked")
+                                </span>
+                            </div>
+
+                            <div class="apartment-content">
+                                <h3 class="apartment-title">@apt.Title</h3>
+                                <div class="apartment-location">
+                                    📍 @apt.Location
+                                </div>
+
+                                @if (!string.IsNullOrEmpty(apt.Description))
+                                {
+                                    <p style="font-size: 0.9rem; color: #666; margin: 0.5rem 0;">
+                                        @(apt.Description.Length > 100 ? apt.Description.Substring(0, 100) + "..." : apt.Description)
+                                    </p>
+                                }
+
+                                <div class="apartment-footer">
+                                    <div>
+                                        <div class="apartment-price-label">Per Month</div>
+                                        <div class="apartment-price">@apt.Price.ToString("C0")</div>
+                                    </div>
+                                    <a asp-controller="Apartments" asp-action="Details" asp-route-id="@apt.ID" 
+                                       class="btn btn-sm btn-primary details-btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Pagination -->
+            
+                var totalPages = (Model.TotalItems + Model.PageSize - 1) / Model.PageSize;
+                var current = Math.Max(1, Model.page);
+                var qs = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(Request.QueryString.ToString());
+                qs.Remove("page");
+
+                string MakeUrl(int p)
+                {
+                    var dict = qs.ToDictionary(k => k.Key, k => k.Value.ToString());
+                    dict["page"] = p.ToString();
+                    return Microsoft.AspNetCore.WebUtilities.QueryHelpers.AddQueryString(Request.Path, dict);
+                }
+            
+
+            @if (totalPages > 1)
+            {
+                <nav class="pagination-container" aria-label="Page navigation">
+                    <ul class="pagination">
+                        @if (current > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@MakeUrl(1)">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="@MakeUrl(current - 1)">Previous</a>
+                            </li>
+                        }
+
+                        @for (int p = Math.Max(1, current - 2); p <= Math.Min(totalPages, current + 2); p++)
+                        {
+                            <li class="page-item @(p == current ? "active" : "")">
+                                <a class="page-link" href="@MakeUrl(p)">@p</a>
+                            </li>
+                        }
+
+                        @if (current < totalPages)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@MakeUrl(current + 1)">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="@MakeUrl(totalPages)">Last</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        }
+    </div>
+
+    <!-- Sidebar Map -->
+    <aside class="map-sidebar">
+        <div class="map-card">
+            <div class="map-header">
+                <h6>📍 Map View</h6>
+            </div>
+            <div class="map-placeholder">
+                Map integration coming soon
+            </div>
+        </div>
+    </aside>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-focus search on hero click
+        document.querySelectorAll('.hero-section input, .hero-section select').forEach(el => {
+            el.addEventListener('focus', function() {
+                this.parentElement.closest('.col-lg-5')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+    </script>
+}
