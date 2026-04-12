@@ -1,4 +1,7 @@
-﻿namespace Apartment_Project.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+
+namespace Apartment_Project.Models
 {
     public class Apartment
     {
@@ -10,6 +13,8 @@
         public decimal Price { get; set; }
         public bool IsAvailable { get; set; }
 
+        // Not mapped to the database — used only for binding uploaded file in forms
+        [NotMapped]
+        public IFormFile? PhotoFile { get; set; }
     }
-    
 }

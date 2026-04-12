@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Apartment_Project.Models.Apartment>
+@using System
 
 @{
     ViewData["Title"] = "Index";
@@ -7,73 +8,53 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SomePhoto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAvailable)
-            </th>
+            <th>Photo</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Availability</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-
 @foreach (var item in Model) {
         <tr>
-            <td>
-                
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SomePhoto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                    @if (item.IsAvailable)
-                    {
-                        <span> Available </span>
-                    }
-                    else
-                    {
-                        <span> Not Available </span>
-                    }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">تعديل</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">التفاصيل </a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">حذف</a> |
-                @if (item.IsAvailable)
+            <td style="width:120px;">
+                @if (item.SomePhoto != null && item.SomePhoto.Length > 0)
                 {
-                    <a asp-action="Book" asp-route-id="@item.ID">احجز الان</a>
+                    var base64 = Convert.ToBase64String(item.SomePhoto);
+                    <img src="data:image;base64,@base64" alt="thumb" class="img-thumbnail" style="max-height:80px;" />
                 }
                 else
                 {
-                    <span> تم الحجز </span>
+                    <div class="text-muted">No photo</div>
+                }
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.Location)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            <td>
+                @if (item.IsAvailable) { <span>Available</span> } else { <span>Not Available</span> }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-info">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger">Delete</a>
+                @if (item.IsAvailable)
+                {
+                    <a asp-action="Book" asp-route-id="@item.ID" class="btn btn-sm btn-success">Book</a>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">Booked</span>
                 }
             </td>
         </tr>
