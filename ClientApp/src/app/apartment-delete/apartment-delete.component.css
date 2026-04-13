@@ -1,8 +1,9 @@
 .page-card {
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  padding: 28px;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(37, 99, 235, 0.18);
 }
 
 .header-row,
@@ -10,75 +11,83 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .secondary-button,
 .danger-button {
   border: none;
   border-radius: 999px;
-  padding: 12px 20px;
+  padding: 14px 22px;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .secondary-button {
-  background: #e5e7eb;
+  background: #f8fafc;
   color: #1f2937;
 }
 
 .danger-button {
-  background: #b00020;
+  background: #dc2626;
   color: white;
 }
 
+.danger-button:hover,
+.secondary-button:hover {
+  transform: translateY(-1px);
+}
+
 .delete-details {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .grid-row {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 280px 1fr;
   gap: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 .photo-panel {
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 16px;
+  border: 1px solid rgba(37, 99, 235, 0.16);
+  border-radius: 24px;
+  padding: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f8fafc;
+  background: #eff6ff;
 }
 
 .detail-photo {
   max-width: 100%;
-  border-radius: 16px;
+  border-radius: 24px;
 }
 
 .no-photo {
-  color: #6b7280;
+  color: var(--muted);
 }
 
 .info-panel h2 {
   margin-top: 0;
+  color: #1e293b;
 }
 
 .info-panel p {
-  margin: 8px 0;
+  margin: 10px 0;
+  color: #475569;
 }
 
 .status {
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  background: #f8fafc;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(37, 99, 235, 0.16);
+  background: #eff6ff;
 }
 
 .status.error {
-  border-color: #f8d7da;
-  background: #fef2f2;
+  border-color: rgba(220, 38, 38, 0.2);
+  background: #fff1f2;
 }
 
 @media (max-width: 900px) {

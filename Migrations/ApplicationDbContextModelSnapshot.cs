@@ -50,6 +50,53 @@ namespace Apartment_Project.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Apartments");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Description = "Beautiful studio apartment with floor-to-ceiling windows and modern amenities.",
+                            IsAvailable = true,
+                            Location = "Downtown, New York",
+                            Price = 2500m,
+                            Title = "Modern Downtown Studio"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Description = "Charming one-bedroom apartment with exposed brick and hardwood floors.",
+                            IsAvailable = true,
+                            Location = "Brooklyn, New York",
+                            Price = 2800m,
+                            Title = "Cozy Brooklyn One Bedroom"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Description = "Stunning penthouse with panoramic city views and premium finishes.",
+                            IsAvailable = false,
+                            Location = "Manhattan, New York",
+                            Price = 5500m,
+                            Title = "Luxury Manhattan Penthouse"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Description = "Large two-bedroom apartment perfect for families.",
+                            IsAvailable = true,
+                            Location = "Queens, New York",
+                            Price = 2200m,
+                            Title = "Spacious Queens Family Home"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Description = "Contemporary apartment with river views and modern kitchen.",
+                            IsAvailable = true,
+                            Location = "Upper West Side, New York",
+                            Price = 3200m,
+                            Title = "Riverside Apartment"
+                        });
                 });
 #pragma warning restore 612, 618
         }
