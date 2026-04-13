@@ -10,42 +10,37 @@
   <div *ngIf="loading" class="status">Loading apartments…</div>
   <div *ngIf="error" class="status error">{{ error }}</div>
 
-  <table class="apartment-table" *ngIf="!loading && !error && apartments.length > 0">
-    <thead>
-      <tr>
-        <th>Photo</th>
-        <th>Title</th>
-        <th>Location</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Availability</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let apartment of apartments">
-        <td>
-          <img *ngIf="getPhotoSrc(apartment)" [src]="getPhotoSrc(apartment)" alt="Apartment photo" class="thumb" />
-          <span *ngIf="!getPhotoSrc(apartment)" class="text-muted">No photo</span>
-        </td>
-        <td>{{ apartment.title }}</td>
-        <td>{{ apartment.location || 'N/A' }}</td>
-        <td>{{ apartment.description || 'No description' }}</td>
-        <td>{{ apartment.price | currency }}</td>
-        <td>
-          <span [class.available]="apartment.isAvailable" [class.booked]="!apartment.isAvailable">
-            {{ apartment.isAvailable ? 'Available' : 'Not Available' }}
+  <div *ngIf="!loading && !error && apartments.length > 0" class="card-grid">
+    <article class="apartment-card" *ngFor="let apartment of apartments">
+      <div class="photo-wrap">
+        <img *ngIf="getPhotoSrc(apartment)" [src]="getPhotoSrc(apartment)" alt="Apartment photo" class="thumb" />
+        <div *ngIf="!getPhotoSrc(apartment)" class="no-photo">No photo</div>
+      </div>
+      <div class="card-body">
+        <div class="card-header">
+          <div>
+            <h2>{{ apartment.title }}</h2>
+            <p class="location">{{ apartment.location || 'Unknown location' }}</p>
+          </div>
+          <span class="status-pill" [class.available]="apartment.isAvailable" [class.booked]="!apartment.isAvailable">
+            {{ apartment.isAvailable ? 'Available' : 'Booked' }}
           </span>
-        </td>
-        <td class="action-column">
+        </div>
+
+        <p class="description">{{ apartment.description || 'No description available.' }}</p>
+        <div class="price-row">
+          <span class="price">{{ apartment.price | currency }}</span>
+        </div>
+
+        <div class="action-column">
           <button type="button" class="action-button" (click)="details(apartment.id)">Details</button>
           <button type="button" class="action-button" (click)="edit(apartment.id)">Edit</button>
           <button type="button" class="action-button danger" (click)="delete(apartment.id)">Delete</button>
           <button *ngIf="apartment.isAvailable" type="button" class="action-button success" (click)="book(apartment.id)">Book</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+    </article>
+  </div>
 
   <div *ngIf="!loading && !error && apartments.length === 0" class="status">No apartments found. Click Create New to add one.</div>
 </section>
