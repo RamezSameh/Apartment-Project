@@ -86,7 +86,8 @@ This project follows the **MVC Pattern**:
 ### 💻 Frontend
 - HTML5  
 - CSS3  
-- JavaScript  
+- JavaScript
+- Angular
 
 ### ⚙️ Backend
 - ASP.NET Core MVC  
