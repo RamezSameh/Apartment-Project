@@ -5,5 +5,6 @@ export interface Apartment {
   description?: string;
   price: number;
   isAvailable: boolean;
+  listingType: 'Rent' | 'Sale';
   photoBase64?: string;
 }

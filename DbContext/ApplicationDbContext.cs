@@ -20,7 +20,8 @@ public class ApplicationDbContext : DbContext
                 Location = "Downtown, New York",
                 Description = "Beautiful studio apartment with floor-to-ceiling windows and modern amenities.",
                 Price = 2500,
-                IsAvailable = true
+                IsAvailable = true,
+                ListingType = ListingType.Rent
             },
             new Apartment
             {
@@ -29,7 +30,8 @@ public class ApplicationDbContext : DbContext
                 Location = "Brooklyn, New York",
                 Description = "Charming one-bedroom apartment with exposed brick and hardwood floors.",
                 Price = 2800,
-                IsAvailable = true
+                IsAvailable = true,
+                ListingType = ListingType.Rent
             },
             new Apartment
             {
@@ -38,7 +40,8 @@ public class ApplicationDbContext : DbContext
                 Location = "Manhattan, New York",
                 Description = "Stunning penthouse with panoramic city views and premium finishes.",
                 Price = 5500,
-                IsAvailable = false
+                IsAvailable = false,
+                ListingType = ListingType.Sale
             },
             new Apartment
             {
@@ -47,7 +50,8 @@ public class ApplicationDbContext : DbContext
                 Location = "Queens, New York",
                 Description = "Large two-bedroom apartment perfect for families.",
                 Price = 2200,
-                IsAvailable = true
+                IsAvailable = true,
+                ListingType = ListingType.Rent
             },
             new Apartment
             {
@@ -56,7 +60,8 @@ public class ApplicationDbContext : DbContext
                 Location = "Upper West Side, New York",
                 Description = "Contemporary apartment with river views and modern kitchen.",
                 Price = 3200,
-                IsAvailable = true
+                IsAvailable = true,
+                ListingType = ListingType.Sale
             }
         );
     }

@@ -30,6 +30,7 @@
         <p class="description">{{ apartment.description || 'No description available.' }}</p>
         <div class="price-row">
           <span class="price">{{ apartment.price | currency }}</span>
+          <span>{{ apartment.listingType === 'Sale' ? 'For Sale' : 'For Rent' }}</span>
         </div>
 
         <div class="action-column">

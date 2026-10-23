@@ -33,6 +33,14 @@
       <small *ngIf="form.get('price')?.invalid && form.get('price')?.touched">Enter a valid price.</small>
     </div>
 
+    <div class="field">
+      <label for="listingType">Listing Type</label>
+      <select id="listingType" formControlName="listingType">
+        <option value="Rent">For Rent</option>
+        <option value="Sale">For Sale</option>
+      </select>
+    </div>
+
     <div class="field checkbox-field">
       <label>
         <input type="checkbox" formControlName="isAvailable" /> Available

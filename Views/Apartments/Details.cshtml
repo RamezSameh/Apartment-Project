@@ -37,6 +37,9 @@
             <dd class="col-sm-8">
                 @if (Model.IsAvailable) { <span>Available</span> } else { <span>Not Available</span> }
             </dd>
+
+            <dt class="col-sm-4">Listing Type</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.ListingType)</dd>
         </dl>
 
         <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary">Edit</a>

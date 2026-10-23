@@ -12,6 +12,7 @@ namespace Apartment_Project.Models
         public byte[]? SomePhoto { get; set; }
         public decimal Price { get; set; }
         public bool IsAvailable { get; set; }
+        public ListingType ListingType { get; set; } = ListingType.Rent;
 
         // Not mapped to the database — used only for binding uploaded file in forms
         [NotMapped]

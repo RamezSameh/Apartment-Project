@@ -57,7 +57,7 @@ namespace Apartment_Project.Controllers
         // POST: Apartments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Location,Description,Price,IsAvailable,PhotoFile")] Apartment apartment)
+        public async Task<IActionResult> Create([Bind("ID,Title,Location,Description,Price,IsAvailable,ListingType,PhotoFile")] Apartment apartment)
         {
             // Validate uploaded file (if present)
             if (apartment.PhotoFile != null)
@@ -97,7 +97,7 @@ namespace Apartment_Project.Controllers
         // POST: Apartments/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Location,Description,Price,IsAvailable,PhotoFile")] Apartment apartment)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Location,Description,Price,IsAvailable,ListingType,PhotoFile")] Apartment apartment)
         {
             if (id != apartment.ID) return NotFound();
 
@@ -124,6 +124,7 @@ namespace Apartment_Project.Controllers
             existing.Description = apartment.Description;
             existing.Price = apartment.Price;
             existing.IsAvailable = apartment.IsAvailable;
+            existing.ListingType = apartment.ListingType;
 
             // Replace photo only when a valid new file was uploaded
             if (apartment.PhotoFile != null && apartment.PhotoFile.Length > 0)

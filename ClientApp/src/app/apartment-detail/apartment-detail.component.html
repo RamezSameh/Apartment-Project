@@ -38,6 +38,10 @@
           <dt>Availability</dt>
           <dd>{{ apartment.isAvailable ? 'Available' : 'Booked' }}</dd>
         </div>
+        <div>
+          <dt>Listing Type</dt>
+          <dd>{{ apartment.listingType === 'Sale' ? 'For Sale' : 'For Rent' }}</dd>
+        </div>
       </dl>
 
       <div class="button-row">

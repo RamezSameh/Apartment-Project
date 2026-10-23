@@ -32,6 +32,15 @@
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
+    <div class="col-md-4">
+        <label asp-for="ListingType" class="form-label"></label>
+        <select asp-for="ListingType" class="form-select">
+            <option value="Rent">For Rent</option>
+            <option value="Sale">For Sale</option>
+        </select>
+        <span asp-validation-for="ListingType" class="text-danger"></span>
+    </div>
+
     <div class="col-md-4 form-check align-self-end">
         <input asp-for="IsAvailable" class="form-check-input" />
         <label asp-for="IsAvailable" class="form-check-label"></label>

@@ -44,6 +44,7 @@ namespace Apartment_Project.Controllers.Api
                 Description = dto.Description,
                 Price = dto.Price,
                 IsAvailable = dto.IsAvailable,
+                ListingType = dto.ListingType,
                 SomePhoto = DecodePhoto(dto.PhotoBase64)
             };
 
@@ -67,6 +68,7 @@ namespace Apartment_Project.Controllers.Api
             apartment.Description = dto.Description;
             apartment.Price = dto.Price;
             apartment.IsAvailable = dto.IsAvailable;
+            apartment.ListingType = dto.ListingType;
 
             if (!string.IsNullOrWhiteSpace(dto.PhotoBase64))
             {
@@ -113,6 +115,7 @@ namespace Apartment_Project.Controllers.Api
                 Description = apartment.Description,
                 Price = apartment.Price,
                 IsAvailable = apartment.IsAvailable,
+                ListingType = apartment.ListingType,
                 PhotoBase64 = apartment.SomePhoto == null ? null : Convert.ToBase64String(apartment.SomePhoto)
             };
         }

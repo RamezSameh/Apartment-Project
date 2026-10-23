@@ -31,6 +31,7 @@ export class ApartmentFormComponent implements OnInit {
       description: [''],
       price: [0, [Validators.required, Validators.min(0)]],
       isAvailable: [true],
+      listingType: ['Rent', Validators.required],
       photoBase64: ['']
     });
   }
@@ -48,7 +49,8 @@ export class ApartmentFormComponent implements OnInit {
             location: apartment.location,
             description: apartment.description,
             price: apartment.price,
-            isAvailable: apartment.isAvailable
+            isAvailable: apartment.isAvailable,
+            listingType: apartment.listingType
           });
           if (apartment.photoBase64) {
             this.photoPreview = `data:image/*;base64,${apartment.photoBase64}`;
