@@ -34,11 +34,14 @@ namespace Apartment_Project.Migrations
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
+                    b.Property<int>("ListingType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("SomePhoto")
                         .HasColumnType("varbinary(max)");
@@ -57,8 +60,9 @@ namespace Apartment_Project.Migrations
                             ID = 1,
                             Description = "Beautiful studio apartment with floor-to-ceiling windows and modern amenities.",
                             IsAvailable = true,
+                            ListingType = 0,
                             Location = "Downtown, New York",
-                            Price = 2500m,
+                            Price = 2500,
                             Title = "Modern Downtown Studio"
                         },
                         new
@@ -66,8 +70,9 @@ namespace Apartment_Project.Migrations
                             ID = 2,
                             Description = "Charming one-bedroom apartment with exposed brick and hardwood floors.",
                             IsAvailable = true,
+                            ListingType = 0,
                             Location = "Brooklyn, New York",
-                            Price = 2800m,
+                            Price = 2800,
                             Title = "Cozy Brooklyn One Bedroom"
                         },
                         new
@@ -75,8 +80,9 @@ namespace Apartment_Project.Migrations
                             ID = 3,
                             Description = "Stunning penthouse with panoramic city views and premium finishes.",
                             IsAvailable = false,
+                            ListingType = 1,
                             Location = "Manhattan, New York",
-                            Price = 5500m,
+                            Price = 5500,
                             Title = "Luxury Manhattan Penthouse"
                         },
                         new
@@ -84,8 +90,9 @@ namespace Apartment_Project.Migrations
                             ID = 4,
                             Description = "Large two-bedroom apartment perfect for families.",
                             IsAvailable = true,
+                            ListingType = 0,
                             Location = "Queens, New York",
-                            Price = 2200m,
+                            Price = 2200,
                             Title = "Spacious Queens Family Home"
                         },
                         new
@@ -93,8 +100,9 @@ namespace Apartment_Project.Migrations
                             ID = 5,
                             Description = "Contemporary apartment with river views and modern kitchen.",
                             IsAvailable = true,
+                            ListingType = 1,
                             Location = "Upper West Side, New York",
-                            Price = 3200m,
+                            Price = 3200,
                             Title = "Riverside Apartment"
                         });
                 });

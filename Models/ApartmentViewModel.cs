@@ -21,7 +21,7 @@ namespace Apartment_Project.Models
         public IFormFile? PhotoFile { get; set; }
 
         [DataType(DataType.Currency)]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         public bool IsAvailable { get; set; }
     }
